@@ -1,13 +1,14 @@
 //
-//  ViewController.swift
+//  AllowanceViewController.swift
 //  Assignment 3
 //
-//  Created by vinay bayyapunedi on 08/05/23.
+//  Created by vinay bayyapunedi on 10/05/23.
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UIViewController {
+class AllowanceViewController: UIViewController {
 
     @IBOutlet weak var mainLabel: UILabel!
     
@@ -19,4 +20,3 @@ class ViewController: UIViewController {
 
 
 }
-
