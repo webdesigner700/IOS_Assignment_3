@@ -26,7 +26,14 @@ class HomeScreenViewController: UIViewController {
             let VC = segue.destination as! ProfileViewController
             VC.userName = userNameLabel.text!
         }
+        else if segue.identifier == "goToNewExpenses" {
+            let VC = segue.destination as! NewPlanViewController
+            VC.planType = "Expense"
+        }
+        else if segue.identifier == "goToNewInflux" {
+            let VC = segue.destination as! NewPlanViewController
+            VC.planType = "Influx"
+        }
     }
-
 
 }
