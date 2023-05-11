@@ -10,12 +10,21 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-
     
+    var userName:String?
+
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    
+    @IBAction func returnToLoginPage(_ sender: UIButton) {
+        
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        userNameLabel.text = userName
     }
 
 

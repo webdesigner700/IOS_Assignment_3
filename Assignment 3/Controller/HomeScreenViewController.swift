@@ -20,6 +20,13 @@ class HomeScreenViewController: UIViewController {
         userNameLabel.text = userName
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToProfilePage" {
+            let VC = segue.destination as! ProfileViewController
+            VC.userName = userNameLabel.text!
+        }
+    }
 
 
 }
