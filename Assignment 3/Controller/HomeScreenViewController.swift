@@ -9,13 +9,16 @@ import Foundation
 import UIKit
 
 class HomeScreenViewController: UIViewController {
-
-    @IBOutlet weak var mainLabel: UILabel!
     
+    var userName:String?
+    
+    @IBOutlet weak var userNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        userNameLabel.text = userName
+        
     }
 
 

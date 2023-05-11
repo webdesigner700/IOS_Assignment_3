@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var mainLabel: UILabel!
+
     
     
     override func viewDidLoad() {

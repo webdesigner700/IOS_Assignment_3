@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 class NewPlanViewController: UIViewController {
-
-    @IBOutlet weak var mainLabel: UILabel!
     
     
     override func viewDidLoad() {
