@@ -7,6 +7,16 @@
 
 import Foundation
 
+
+struct Plan: Codable {
+    
+    var planID: Int
+    var planName: String
+    var amount: Int
+    var transactionTime: Int
+    var paymentType: String
+}
+
 class DataStore {
     
 }
