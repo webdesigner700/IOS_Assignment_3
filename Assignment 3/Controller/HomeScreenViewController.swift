@@ -20,9 +20,9 @@ class HomeScreenViewController: UIViewController {
 
     var descriptionButtonChecker = false
     
-    var newPlans:[Plan] = [
-        Plan(planID: 1, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
-        Plan(planID: 2, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")]
+//    var newPlans:[Plan] = [
+//        Plan(planID: 1, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
+//        Plan(planID: 2, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")]
     
     
     @IBOutlet weak var userNameLabel: UILabel!
@@ -32,7 +32,23 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        planDetailsTable.delegate = self
+        planDetailsTable.dataSource = self
+        
         userNameLabel.text = userName
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        //self.viewDidLoad()
+        
+//        planDetailsTable.delegate = self
+//        planDetailsTable.dataSource = self
+        
+        //userNameLabel.text = userName
+        
+        planDetailsTable.reloadData()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

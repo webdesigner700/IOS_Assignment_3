@@ -42,7 +42,27 @@ class NewPlanViewController: UIViewController {
         }
         
     }
-
     
-
+    @IBAction func savePlanButtonPressed(_ sender: UIButton) {
+        
+        if (planType == "Expense" || planType == "Influx"){ // create new money plan
+            DataStore.shared.addNewPlan(
+                name: planNameTextField.text ?? "",
+                money: Int(amountTextField.text ?? "0") ?? 0,
+                time: Int(transactionTimeTextField.text ?? "0") ?? 0,
+                payType: paymentTypeTextField.text ?? ""
+            )
+        }
+        else{ // update existing records with newest information
+            let index = DataStore.shared.getPlanStoredLocation(planID: descriptionPlan!.planID)
+            DataStore.shared.storedPlans[index].planName = planNameTextField.text ?? ""
+            DataStore.shared.storedPlans[index].amount = Int(amountTextField.text ?? "0") ?? 0
+            DataStore.shared.storedPlans[index].transactionTime = Int(transactionTimeTextField.text ?? "0") ?? 0
+            DataStore.shared.storedPlans[index].paymentType = paymentTypeTextField.text ?? ""
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
 }
