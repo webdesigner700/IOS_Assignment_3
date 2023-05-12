@@ -27,14 +27,10 @@ class HomeScreenViewController: UIViewController {
     
     @IBOutlet weak var planDetailsTable: UITableView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         userNameLabel.text = userName
-        
-        print(newPlans)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,6 +47,7 @@ class HomeScreenViewController: UIViewController {
             VC.planType = "Influx"
         }
     }
+    
 
 }
 
@@ -71,6 +68,7 @@ extension HomeScreenViewController:UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let plan = newPlans[indexPath.row]
+        let button = UIButton()
         
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
@@ -81,9 +79,14 @@ extension HomeScreenViewController:UITableViewDataSource {
         }
         
         if let descriptionLabel = cell.viewWithTag(descriptionTag) as? UILabel {
+            
             descriptionLabel.text = plan.paymentType
         }
 
         return cell
     }
+}
+
+class CustomTableViewCell: UITableView {
+    
 }
