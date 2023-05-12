@@ -17,6 +17,7 @@
 		A122F4A12A08B37B004AA36E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A122F49F2A08B37B004AA36E /* Main.storyboard */; };
 		A122F4A32A08B37F004AA36E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A122F4A22A08B37F004AA36E /* Assets.xcassets */; };
 		A122F4A62A08B37F004AA36E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A122F4A42A08B37F004AA36E /* LaunchScreen.storyboard */; };
+		A1E339032A0DEA1200D3BF77 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E339022A0DEA1200D3BF77 /* DataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A122F4A22A08B37F004AA36E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A122F4A52A08B37F004AA36E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A122F4A72A08B37F004AA36E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1E339022A0DEA1200D3BF77 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		A122F48D2A08B37A004AA36E = {
 			isa = PBXGroup;
 			children = (
+				A1E339022A0DEA1200D3BF77 /* DataStore.swift */,
 				A122F4982A08B37B004AA36E /* Assignment 3 */,
 				A122F4972A08B37B004AA36E /* Products */,
 			);
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11A75F12A0B74490044C09E /* ProfileViewController.swift in Sources */,
+				A1E339032A0DEA1200D3BF77 /* DataStore.swift in Sources */,
 				A122F49E2A08B37B004AA36E /* ViewController.swift in Sources */,
 				A11A75EB2A0B74010044C09E /* HomeScreenViewController.swift in Sources */,
 				A11A75EF2A0B74320044C09E /* NewPlanViewController.swift in Sources */,

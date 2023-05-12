@@ -8,11 +8,25 @@
 import Foundation
 import UIKit
 
+
+struct Plan: Codable {
+    
+    var planName: String
+    var amount: Int
+    var transactionTime: Int
+    var paymentType: String
+}
+
+let NEW_PLAN = "newPlan"
+
 class HomeScreenViewController: UIViewController {
     
     var userName:String?
     
     @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var planDetailsTable: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

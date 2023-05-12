@@ -13,10 +13,9 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     //https://codewithchris.com/uipickerview-example/ - refer to this for VIewPicker
     
     
-    @IBOutlet weak var timeFrameTextField: UITextField!
-    
-    
     @IBOutlet weak var timeFrameDropDown: UIPickerView!
+    
+    var timeFrame:String?
     
     var list : [String] = [String]()
     
@@ -58,7 +57,7 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // This method is triggered whenever the user makes a change to the picker selection
         // The parameter named row and componment represents what we selected
         
-        timeFrameTextField.text = String(list[row])
+        timeFrame = String(list[row])
     }
 
 }
