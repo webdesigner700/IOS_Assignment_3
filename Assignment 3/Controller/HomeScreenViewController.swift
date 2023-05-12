@@ -17,6 +17,8 @@ class HomeScreenViewController: UIViewController {
     let descriptionTag = 102
     
     var userName:String?
+
+    var descriptionButtonChecker = false
     
     var newPlans:[Plan] = [
         Plan(planID: 1, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
@@ -48,6 +50,32 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        
+        let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
+        
+        DataStore.shared.descriptionPlan = descriptionPlan
+        
+        descriptionButtonChecker = true
+        
+        let NewPlanViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewPlanViewController") as! NewPlanViewController
+        
+        self.navigationController?.pushViewController(NewPlanViewController, animated: true)
+    
+        
+        
+//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//            if segue.identifier == "goToPlanDescription" {
+//                let VC = segue.destination as! NewPlanViewController
+//                VC.planNameTextField.text = plan.planName
+//                VC.amountTextField.text = String(plan.amount)
+//                VC.paymentTypeTextField.text = plan.paymentType
+//            }
+//        }
+        
+    }
+    
 
 }
 
@@ -61,14 +89,13 @@ extension HomeScreenViewController:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-        return newPlans.count
+        return DataStore.shared.storedPlans.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let plan = newPlans[indexPath.row]
-        let button = UIButton()
+        let plan = DataStore.shared.storedPlans[indexPath.row]
         
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
@@ -78,9 +105,12 @@ extension HomeScreenViewController:UITableViewDataSource {
             amountLabel.text = String(plan.amount)
         }
         
-        if let descriptionLabel = cell.viewWithTag(descriptionTag) as? UILabel {
+        if let descriptionButton = cell.viewWithTag(descriptionTag) as? UIButton {
             
-            descriptionLabel.text = plan.paymentType
+            descriptionButton.tag = plan.planID
+            
+            descriptionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+            // this runs when the button is pressed on
         }
 
         return cell

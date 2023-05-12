@@ -17,9 +17,13 @@ class NewPlanViewController: UIViewController {
     
     @IBOutlet weak var planTypeLabel: UILabel!
     
+    @IBOutlet weak var transactionTimeTextField: UITextField!
+    
     @IBOutlet weak var amountTextField: UITextField!
     
     @IBOutlet weak var paymentTypeTextField: UITextField!
+
+    var descriptionPlan: Plan?
     
     
     override func viewDidLoad() {
@@ -27,7 +31,18 @@ class NewPlanViewController: UIViewController {
         
         planTypeLabel.text = planType
         
+        if (DataStore.shared.descriptionPlan.planName != "Dummy") {
+            self.descriptionPlan = DataStore.shared.descriptionPlan
+            DataStore.shared.descriptionPlan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
+            
+            planNameTextField.text = self.descriptionPlan!.planName
+            amountTextField.text = String(self.descriptionPlan!.amount)
+            transactionTimeTextField.text = String(self.descriptionPlan!.transactionTime)
+            paymentTypeTextField.text = self.descriptionPlan!.paymentType
+        }
+        
     }
 
+    
 
 }
