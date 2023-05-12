@@ -32,13 +32,12 @@ class DataStore {
         allowanceCalculationPeriod = period
     }
     
-    func addPlan(/*ID: Int, */name: String, amounts: Int, time: Int, payType: String) {
+    func addPlan(/*ID: Int, */name: String, amounts: Int, time: Int, payType: String) { // add new plan with unique ID
         storedPlans.append(Plan(planID: assignID, planName: name, amount: amounts, transactionTime: time, paymentType: payType))
         assignID += 1
     }
     
-    func removePlanByID(ID: Int){
-        // Remove this bubble from storedBubble array
+    func removePlanByID(ID: Int){ // remove plan by referencing the ID
         for index in (0...storedPlans.count - 1) {
             if storedPlans[index].planID == ID {
                 storedPlans.remove(at: index)
@@ -47,13 +46,22 @@ class DataStore {
         }// end of for loop
     }
     
-    func savePlan(){
+    func getPlanByName(name: String) -> Plan { // retrieve plan my referencing the name, which should be first matching occurance
+        for index in (0...storedPlans.count - 1) {
+            if storedPlans[index].planName == name {
+                return storedPlans[index]
+            }
+        }// end of for loop
+        return Plan(planID: 0, planName: "Error", amount: 0, transactionTime: 0, paymentType: "Error")
+    }
+    
+    func savePlan(){ // save the plan array into UserDefault
         let defaults = UserDefaults.standard
         defaults.set(try? PropertyListEncoder().encode(storedPlans), forKey: KEY_MONEY_PLAN)
     }
     
     // retrieve previous result from user default
-    func readGameResults() -> [Plan] {
+    func readPlan() -> [Plan] {
         let defaults = UserDefaults.standard
         if let savedArrayData = defaults.value(forKey: KEY_MONEY_PLAN) as? Data {
             if let array = try? PropertyListDecoder().decode(Array<Plan>.self, from: savedArrayData){
@@ -67,7 +75,7 @@ class DataStore {
         //return array
     }
     
-    func clearGameResults(){
+    func clearPlan(){
         let defaults = UserDefaults.standard
         //defaults.set(gameResultArray, forKey: KEY_GAME_RESULT)
         let emptyArray: [Plan] = []

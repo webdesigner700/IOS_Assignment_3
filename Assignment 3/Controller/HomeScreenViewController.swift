@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 
-struct Plan: Codable {
-    
-    var planName: String
-    var amount: Int
-    var transactionTime: Int
-    var paymentType: String
-}
+//struct Plan: Codable {
+//    
+//    var planName: String
+//    var amount: Int
+//    var transactionTime: Int
+//    var paymentType: String
+//}
 
 let NEW_PLAN = "newPlan"
 
