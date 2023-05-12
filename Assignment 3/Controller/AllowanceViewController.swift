@@ -15,7 +15,7 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBOutlet weak var timeFrameDropDown: UIPickerView!
     
-    var timeFrame:String?
+    var timeFrame: String?
     
     var list : [String] = [String]()
     
@@ -58,6 +58,7 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // The parameter named row and componment represents what we selected
         
         timeFrame = String(list[row])
+        DataStore.shared.timeframe = timeFrame!
     }
 
 }

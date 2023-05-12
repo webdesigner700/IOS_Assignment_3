@@ -22,24 +22,27 @@ class DataStore {
     static let shared = DataStore()
     
     var storedPlans: [Plan] = [
-        Plan(planID: 1, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
-        Plan(planID: 2, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
+        Plan(planID: 0, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
+        Plan(planID: 1, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
     ]
     
-    var planID: Int = 3
+    var planID: Int = 2
     
     var descriptionPlan: Plan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
     
+    var timeframe: String = "Weekly"
+    
+    private init(){
+        // put stuff that need to be initialised when the program start running
+        timeframe = "Weekly"
+    }
     
     func findPlanByID(ID: Int) -> Plan {
-        
         for plan in storedPlans {
-            
             if (plan.planID == ID) {
                 return plan
             }
         }
-        
         return Plan(planID: 0, planName: "Error", amount: 0, transactionTime: 0, paymentType: "Error")
     }
     
@@ -50,7 +53,7 @@ class DataStore {
     
     func getPlanStoredLocation(planID: Int) -> Int {
         guard storedPlans.count > 1 else {
-            return 0
+            return -1 // return something that is out of bound to prevent incorrect logic operation in main menu
         }
         
         for index in (0...storedPlans.count - 1) {
@@ -60,6 +63,22 @@ class DataStore {
         }// end of for loop
         
         return 0
+    }
+    
+    func removePlanByID(planID: Int) {
+        guard storedPlans.count > 0 else {
+            return
+        }
+        
+        for index in (0...storedPlans.count - 1) {
+            print("index is \(index)")
+            print("planID is \(planID)")
+            print(storedPlans[index].planID)
+            if storedPlans[index].planID == planID {
+                storedPlans.remove(at: index)
+                return
+            }
+        }// end of for loop
     }
     
 }

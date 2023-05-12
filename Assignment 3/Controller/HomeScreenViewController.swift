@@ -26,6 +26,9 @@ class HomeScreenViewController: UIViewController {
     
     
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var timeframeLabel: UILabel!
+//
+//    @IBOutlet weak var tableDisplayedPlanName: UILabel!
     
     @IBOutlet weak var planDetailsTable: UITableView!
     
@@ -36,6 +39,8 @@ class HomeScreenViewController: UIViewController {
         planDetailsTable.dataSource = self
         
         userNameLabel.text = userName
+        
+        timeframeLabel.text = DataStore.shared.timeframe
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +53,7 @@ class HomeScreenViewController: UIViewController {
         //userNameLabel.text = userName
         
         planDetailsTable.reloadData()
+        timeframeLabel.text = DataStore.shared.timeframe
         
     }
     
@@ -68,7 +74,8 @@ class HomeScreenViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         
-        
+        print("now this button has tag of \(sender.tag)")
+        //print("the plan name would be \(tableDisplayedPlanName!)")
         let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
         
         DataStore.shared.descriptionPlan = descriptionPlan

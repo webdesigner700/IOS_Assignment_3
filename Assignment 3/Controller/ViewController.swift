@@ -12,7 +12,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var mainLabel: UILabel!
     
-    
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
