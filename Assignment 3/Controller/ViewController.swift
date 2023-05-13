@@ -94,6 +94,7 @@ class ViewController: UIViewController {
 
         // Add a target to the segmented control to handle changes
         segmentedControl.addTarget(self, action: #selector(handleSegmentedControlChange), for: .valueChanged)
+        segmentedControl.frame = CGRect(x: 0, y: 0, width: 410, height: 120)
     }
 
     @objc func handleSegmentedControlChange() {

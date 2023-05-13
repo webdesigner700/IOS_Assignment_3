@@ -63,10 +63,27 @@ class HomeScreenViewController: UIViewController {
         
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "goToProfilePage" {
+//            let VC = segue.destination as! ProfileViewController
+//            VC.userName = userNameLabel.text!
+//        }
+//        else if segue.identifier == "goToNewExpenses" {
+//            let VC = segue.destination as! NewPlanViewController
+//            VC.planType = "Expense"
+//        }
+//        else if segue.identifier == "goToNewInflux" {
+//            let VC = segue.destination as! NewPlanViewController
+//            VC.planType = "Influx"
+//        }
+//    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToProfilePage" {
-            let VC = segue.destination as! ProfileViewController
-            VC.userName = userNameLabel.text!
+            if let userName = userNameLabel?.text {
+                let VC = segue.destination as! ProfileViewController
+                VC.userName = userName
+            }
         }
         else if segue.identifier == "goToNewExpenses" {
             let VC = segue.destination as! NewPlanViewController
