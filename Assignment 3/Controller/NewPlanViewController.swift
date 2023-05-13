@@ -58,7 +58,7 @@ class NewPlanViewController: UIViewController {
             }
         }
         
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         
     }
     

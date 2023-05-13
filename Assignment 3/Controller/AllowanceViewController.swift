@@ -32,7 +32,7 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         timeFrameDropDown.selectRow(DataStore.shared.timeSelecterLocation, inComponent: 0, animated: true)
         
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         
     }
     
