@@ -147,7 +147,7 @@ class ViewController: UIViewController {
         }
         
         // Call the login function from the database manager
-        DatabaseHelper.shared.login(email: username, password: password) { success in
+        DatabaseHelper.shared.login(username: username, password: password) { success in
             if success {
                 // Login successful, perform segue to next screen
                 self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
@@ -171,7 +171,7 @@ class ViewController: UIViewController {
         DatabaseHelper.shared.signUp(email: email, username: username, password: password) { success in
             if success {
                 // Signup successful, perform segue to next screen
-                self.performSegue(withIdentifier: "signupSuccessfulSegue", sender: self)
+                self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
             } else {
                 // Signup failed, display error message
                 let alertController = UIAlertController(title: "Error", message: "Unable to create account.", preferredStyle: .alert)

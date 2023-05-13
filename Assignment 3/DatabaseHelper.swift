@@ -133,22 +133,33 @@ class DatabaseHelper {
         completion(true)
     }
     
-    func login(email: String?, password: String?, completion: @escaping (Bool) -> Void) {
-        guard let email = email, let password = password else {
-            completion(false)
-            return
-        }
+    func login(username: String, password: String, completion: @escaping (Bool) -> Void) {
+        let query = "SELECT * FROM users WHERE username = ? AND password = ?;"
         
-        if !userExists(email: email) {
-            completion(false)
-            return
-        }
+        var statement: OpaquePointer?
         
-        if loginUser(email: email, password: password) {
-            completion(true)
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+            // Bind parameters to the statement
+            sqlite3_bind_text(statement, 1, (username as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 2, (password as NSString).utf8String, -1, nil)
+            
+            // Execute the statement
+            if sqlite3_step(statement) == SQLITE_ROW {
+                // User found, login successful
+                completion(true)
+            } else {
+                // User not found, login failed
+                completion(false)
+            }
         } else {
+            // Statement preparation failed
+            print("Error preparing statement: \(String(cString: sqlite3_errmsg(db)))")
             completion(false)
         }
+        
+        // Reset the statement and finalize it
+        sqlite3_reset(statement)
+        sqlite3_finalize(statement)
     }
     
 }
