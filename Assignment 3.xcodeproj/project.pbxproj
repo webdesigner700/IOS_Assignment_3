@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6497FA542A0FF705005E8A3E /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6497FA532A0FF705005E8A3E /* DatabaseHelper.swift */; };
+		6497FA5C2A0FF936005E8A3E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6497FA5B2A0FF936005E8A3E /* libsqlite3.tbd */; };
 		A11A75EB2A0B74010044C09E /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A75EA2A0B74010044C09E /* HomeScreenViewController.swift */; };
 		A11A75ED2A0B74170044C09E /* AllowanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A75EC2A0B74170044C09E /* AllowanceViewController.swift */; };
 		A11A75EF2A0B74320044C09E /* NewPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A75EE2A0B74320044C09E /* NewPlanViewController.swift */; };
@@ -21,11 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6497FA512A0FF67D005E8A3E /* sqlite-tools-osx-x86-3410200 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "sqlite-tools-osx-x86-3410200"; sourceTree = "<group>"; };
+		6497FA532A0FF705005E8A3E /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		6497FA5B2A0FF936005E8A3E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A11A75EA2A0B74010044C09E /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		A11A75EC2A0B74170044C09E /* AllowanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowanceViewController.swift; sourceTree = "<group>"; };
 		A11A75EE2A0B74320044C09E /* NewPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlanViewController.swift; sourceTree = "<group>"; };
 		A11A75F02A0B74490044C09E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		A122F4962A08B37B004AA36E /* Assignment 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Assignment 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A122F4962A08B37B004AA36E /* Assignment 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Assignment 3.app"; path = "/Users/gracesolibun/Desktop/UTS/UTS_2023_Autumn/Application_Development_in_the_iOS_Environment_41889/Assignment_3/IOS_Assignment_3/build/Debug-iphoneos/Assignment 3.app"; sourceTree = "<absolute>"; };
 		A122F4992A08B37B004AA36E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A122F49B2A08B37B004AA36E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A122F49D2A08B37B004AA36E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,12 +46,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6497FA5C2A0FF936005E8A3E /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6497FA502A0FF67C005E8A3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6497FA5B2A0FF936005E8A3E /* libsqlite3.tbd */,
+				6497FA512A0FF67D005E8A3E /* sqlite-tools-osx-x86-3410200 */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A11A75E72A0B730F0044C09E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,16 +94,8 @@
 			children = (
 				A1E339022A0DEA1200D3BF77 /* DataStore.swift */,
 				A122F4982A08B37B004AA36E /* Assignment 3 */,
-				A122F4972A08B37B004AA36E /* Products */,
+				6497FA502A0FF67C005E8A3E /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		A122F4972A08B37B004AA36E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A122F4962A08B37B004AA36E /* Assignment 3.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A122F4982A08B37B004AA36E /* Assignment 3 */ = {
@@ -102,6 +109,7 @@
 				A122F4A22A08B37F004AA36E /* Assets.xcassets */,
 				A122F4A42A08B37F004AA36E /* LaunchScreen.storyboard */,
 				A122F4A72A08B37F004AA36E /* Info.plist */,
+				6497FA532A0FF705005E8A3E /* DatabaseHelper.swift */,
 			);
 			path = "Assignment 3";
 			sourceTree = "<group>";
@@ -150,7 +158,7 @@
 				Base,
 			);
 			mainGroup = A122F48D2A08B37A004AA36E;
-			productRefGroup = A122F4972A08B37B004AA36E /* Products */;
+			productRefGroup = A122F48D2A08B37A004AA36E;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -178,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11A75F12A0B74490044C09E /* ProfileViewController.swift in Sources */,
+				6497FA542A0FF705005E8A3E /* DatabaseHelper.swift in Sources */,
 				A1E339032A0DEA1200D3BF77 /* DataStore.swift in Sources */,
 				A122F49E2A08B37B004AA36E /* ViewController.swift in Sources */,
 				A11A75EB2A0B74010044C09E /* HomeScreenViewController.swift in Sources */,
