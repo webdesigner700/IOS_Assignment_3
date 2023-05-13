@@ -127,27 +127,40 @@ class ViewController: UIViewController {
         }
     }
     
-    func login(username: String?, password: String?, completion: @escaping (Bool) -> Void) {
-        // Check if the username and password are not nil
-        guard let username = username, let password = password else {
-            completion(false)
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        // Validate the input fields and perform login
+        guard let username = usernameTextField.text, !username.isEmpty else {
+            // Display error message for empty username
+            let alertController = UIAlertController(title: "Error", message: "Please enter a username.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            // Display error message for empty password
+            let alertController = UIAlertController(title: "Error", message: "Please enter a password.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
             return
         }
         
-        // Query the database to check if the user exists and the password is correct
-        let query = "SELECT * FROM users WHERE username = ? AND password = ?"
-        let params = [username, password]
-        executeQuery(query: query, params: params) { result in
-            if result.success, let rows = result.rows, rows.count == 1 {
-                // User exists and password is correct
-                completion(true)
+        // Call the login function from the database manager
+        DatabaseHelper.shared.login(email: username, password: password) { success in
+            if success {
+                // Login successful, perform segue to next screen
+                self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
             } else {
-                // User does not exist or password is incorrect
-                completion(false)
+                // Login failed, display error message
+                let alertController = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
-
+    
     @IBAction func signUpButtonTapped(_ sender: Any) {
         // Validate the input fields and create a new account
         let email = emailTextField.text
