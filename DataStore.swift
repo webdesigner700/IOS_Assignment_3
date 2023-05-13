@@ -27,17 +27,19 @@ class DataStore {
     static let shared = DataStore()
     
     var storedPlans: [Plan] = [
-        //Plan(planID: 0, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
-        //Plan(planID: 1, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
+        Plan(planID: 0, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
+        Plan(planID: 1, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
     ]
     
-    var planID: Int = 1
+    var buttonIDs: [Int] = []
+    
+    var planID: Int = 2
     
     var descriptionPlan: Plan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
     
     var timeframe: String = "Weekly"
     var timeSelecterLocation: Int = 2
-    
+
     private init(){
         // put stuff that need to be initialised when the program start running
         timeframe = "Weekly"
@@ -82,7 +84,7 @@ class DataStore {
             
             if storedPlans[index].planID == planID {
                 storedPlans.remove(at: index)
-                
+                //self.planID -= 1
                 return
             }
         }// end of for loop

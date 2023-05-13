@@ -12,14 +12,16 @@ class HomeScreenViewController: UIViewController {
     
     let NEW_PLAN = "newPlan"
     
-    let idTag = 100
-    let planNameTag = 101
-    let amountTag = 102
-    let descriptionTag = 103
+    let planNameTag = 100
+    let amountTag = 101
+    let payTag = 102
+    let timeTag = 103
     
     var userName:String?
 
     var descriptionButtonChecker = false
+    
+    var tag = 0
     
 //    var newPlans:[Plan] = [
 //        Plan(planID: 1, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
@@ -75,17 +77,39 @@ class HomeScreenViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-    
-        print(sender.tag)
-        let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
         
-        DataStore.shared.descriptionPlan = descriptionPlan
+        guard DataStore.shared.storedPlans.count > 0 else {
+            return
+        }
         
-        descriptionButtonChecker = true
+        DataStore.shared.storedPlans.remove(at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+//        let thisCell = planDetailsTable.cellForRow(at: indexPath)?.viewWithTag(idTag) as? UILabel
+//        let thisPlanID = thisCell?.text
+//        print("Removing plan with ID \(thisPlanID)")
+        planDetailsTable.deleteRows(at: [indexPath], with: .fade)
         
-        let NewPlanViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewPlanViewController") as! NewPlanViewController
-        
-        self.navigationController?.pushViewController(NewPlanViewController, animated: true)
+//        let indexPath = IndexPath(row: sender.tag, section: 0)
+//        //let rowNumber = sender.tag
+//        //let thisPlanIDLabel = planDetailsTable.cellForRow(at: indexPath)?.viewWithTag(sender.tag) as? UILabel
+//        let thisPlanIDLabel = sender.superview?.viewWithTag(sender.tag) as? UILabel
+//        //let thisPlanIDLabel = cell?.viewWithTag(planNameTag) as? UILabel
+//        let planIDText: String = thisPlanIDLabel?.text ?? "Error String"
+//        print(planIDText)
+
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        let cell = tableView.cellForRow(at: indexPath)
+
+//        let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
+////        let descriptionPlan = DataStore.shared.findPlanByID(ID: Int(planIDText)!)
+//
+//        DataStore.shared.descriptionPlan = descriptionPlan
+//
+//        descriptionButtonChecker = true
+//
+//        let NewPlanViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewPlanViewController") as! NewPlanViewController
+//
+//        self.navigationController?.pushViewController(NewPlanViewController, animated: true)
         
     }
     
@@ -109,14 +133,12 @@ extension HomeScreenViewController:UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let plan = DataStore.shared.storedPlans[indexPath.row]
+        //let idLabel = cell.viewWithTag(idTag) as? UILabel
         
         print("Now this cell is processing plan at index path row \(indexPath.row)")
         print(plan)
-        //print("The button in this cell has tag: \(cell.viewWithTag(descriptionTag)!.tag)")
         
-        if let idLabel = cell.viewWithTag(idTag) as? UILabel {
-            idLabel.text = String(plan.planID)
-        }
+        
         
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
@@ -126,27 +148,28 @@ extension HomeScreenViewController:UITableViewDataSource {
             amountLabel.text = String(plan.amount)
         }
         
-        if let descriptionButton = cell.viewWithTag(descriptionTag) as? UIButton {
-            
-            print("before changing button tag, the data are:")
-            print("button tag is \(descriptionButton.tag)")
-            print("plan id is \(plan.planID)")
-            
-            descriptionButton.tag = plan.planID
-            
-            print("after changing, the button tag:")
-            print(descriptionButton.tag)
-
-            print("--------")
-            
-            descriptionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-            // this runs when the button is pressed on
+        if let idLabel = cell.viewWithTag(payTag) as? UILabel {
+            idLabel.text = String(plan.paymentType)
         }
         
-        print("--------|")
+        if let idLabel = cell.viewWithTag(timeTag) as? UILabel {
+            idLabel.text = String(plan.transactionTime)
+        }
+        
+//        if let descriptionButton = cell.viewWithTag(descriptionTag) as? UIButton {
+//
+//
+//            descriptionButton.tag = indexPath.row
+//
+//            //print("Adding button with tag \(plan.planID) into array")
+//
+//            descriptionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+//            // this runs when the button is pressed on
+//        }
 
         return cell
     }
+    
 }
 
 class CustomTableViewCell: UITableView {

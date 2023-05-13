@@ -48,7 +48,7 @@ class NewPlanViewController: UIViewController {
         else if (descriptionPlan != nil){
             
             planTypeLabel.text = "View Plan Detail"
-            removePlanButton.isHidden = false
+            //removePlanButton.isHidden = false
             
             if (descriptionPlan!.amount >= 0){
                 mathSymbolLabel.text = "+"
