@@ -122,7 +122,7 @@ extension HomeScreenViewController:UITableViewDataSource {
         
         print("Now this cell is processing plan at index path row \(indexPath.row)")
         print(plan)
-        print("The button in this cell has tag: \(cell.viewWithTag(descriptionTag)!.tag)")
+        //print("The button in this cell has tag: \(cell.viewWithTag(descriptionTag)!.tag)")
         
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
