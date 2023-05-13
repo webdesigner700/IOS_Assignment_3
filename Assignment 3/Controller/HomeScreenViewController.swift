@@ -12,9 +12,10 @@ class HomeScreenViewController: UIViewController {
     
     let NEW_PLAN = "newPlan"
     
-    let planNameTag = 100
-    let amountTag = 101
-    let descriptionTag = 102
+    let idTag = 100
+    let planNameTag = 101
+    let amountTag = 102
+    let descriptionTag = 103
     
     var userName:String?
 
@@ -28,7 +29,8 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeframeLabel: UILabel!
 //
-//    @IBOutlet weak var tableDisplayedPlanName: UILabel!
+    //@IBOutlet weak var planIDLabel: UILabel!
+    //    @IBOutlet weak var tableDisplayedPlanName: UILabel!
     
     @IBOutlet weak var planDetailsTable: UITableView!
     
@@ -73,9 +75,8 @@ class HomeScreenViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        
-        print("now this button has tag of \(sender.tag)")
-        //print("the plan name would be \(tableDisplayedPlanName!)")
+    
+        print(sender.tag)
         let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
         
         DataStore.shared.descriptionPlan = descriptionPlan
@@ -85,17 +86,6 @@ class HomeScreenViewController: UIViewController {
         let NewPlanViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewPlanViewController") as! NewPlanViewController
         
         self.navigationController?.pushViewController(NewPlanViewController, animated: true)
-    
-        
-        
-//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//            if segue.identifier == "goToPlanDescription" {
-//                let VC = segue.destination as! NewPlanViewController
-//                VC.planNameTextField.text = plan.planName
-//                VC.amountTextField.text = String(plan.amount)
-//                VC.paymentTypeTextField.text = plan.paymentType
-//            }
-//        }
         
     }
     
@@ -124,6 +114,10 @@ extension HomeScreenViewController:UITableViewDataSource {
         print(plan)
         //print("The button in this cell has tag: \(cell.viewWithTag(descriptionTag)!.tag)")
         
+        if let idLabel = cell.viewWithTag(idTag) as? UILabel {
+            idLabel.text = String(plan.planID)
+        }
+        
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
         }
@@ -142,7 +136,7 @@ extension HomeScreenViewController:UITableViewDataSource {
             
             print("after changing, the button tag:")
             print(descriptionButton.tag)
-            
+
             print("--------")
             
             descriptionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)

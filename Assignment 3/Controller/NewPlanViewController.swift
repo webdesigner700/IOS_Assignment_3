@@ -29,11 +29,7 @@ class NewPlanViewController: UIViewController {
         
         if (DataStore.shared.descriptionPlan.planName != "Dummy") {
             self.descriptionPlan = DataStore.shared.descriptionPlan
-            print("Currently viewing details of plan: ")
-            print(descriptionPlan)
-            print("-----")
             DataStore.shared.descriptionPlan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
-            
             planNameTextField.text = self.descriptionPlan!.planName
             amountTextField.text = String(self.descriptionPlan!.amount)
             transactionTimeTextField.text = String(self.descriptionPlan!.transactionTime)
@@ -62,37 +58,14 @@ class NewPlanViewController: UIViewController {
             }
         }
         
-        
-        
-//        if (DataStore.shared.descriptionPlan.planName != "Dummy") {
-//            self.descriptionPlan = DataStore.shared.descriptionPlan
-//            DataStore.shared.descriptionPlan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
-//
-//            planNameTextField.text = self.descriptionPlan!.planName
-//            amountTextField.text = String(self.descriptionPlan!.amount)
-//            transactionTimeTextField.text = String(self.descriptionPlan!.transactionTime)
-//            paymentTypeTextField.text = self.descriptionPlan!.paymentType
-//
-//            //removePlanButton.isHidden = false
-//
-//        }
-        
     }
     
     @IBAction func savePlanButtonPressed(_ sender: UIButton) {
         
         if (planType == "Expense"){ // create new money plan
             let actualAmount = (0 - (Int(amountTextField.text ?? "0") ?? 0))
-            DataStore.shared.addNewPlan(
-                name: planNameTextField.text ?? "",
-                money: actualAmount,
-                time: Int(transactionTimeTextField.text ?? "0") ?? 0,
-                payType: paymentTypeTextField.text ?? ""
+            DataStore.shared.addNewPlan(name: planNameTextField.text ?? "", money: actualAmount, time: Int(transactionTimeTextField.text ?? "0") ?? 0, payType: paymentTypeTextField.text ?? ""
             )
-            
-            print("After adding new plan, storedPlans array is ")
-            print(DataStore.shared.storedPlans)
-            print("---")
         }
         else if (planType == "Influx"){
             DataStore.shared.addNewPlan(
@@ -101,10 +74,6 @@ class NewPlanViewController: UIViewController {
                 time: Int(transactionTimeTextField.text ?? "0") ?? 0,
                 payType: paymentTypeTextField.text ?? ""
             )
-            
-            print("After adding new planz, storedPlans array is ")
-            print(DataStore.shared.storedPlans)
-            print("---")
         }
         else{ // update existing records with newest information
             let index = DataStore.shared.getPlanStoredLocation(planID: descriptionPlan!.planID)
@@ -114,10 +83,6 @@ class NewPlanViewController: UIViewController {
                 DataStore.shared.storedPlans[index].amount = Int(amountTextField.text ?? "0") ?? 0
                 DataStore.shared.storedPlans[index].transactionTime = Int(transactionTimeTextField.text ?? "0") ?? 0
                 DataStore.shared.storedPlans[index].paymentType = paymentTypeTextField.text ?? ""
-                    
-                print("After modifying plan, storedPlans array is ")
-                print(DataStore.shared.storedPlans)
-                print("---")
             }
                         
         }
@@ -137,10 +102,6 @@ class NewPlanViewController: UIViewController {
         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             DataStore.shared.removePlanByID(planID: self.descriptionPlan!.planID)
             // Go back to previous screen, which should be the main menu in current context
-            
-            print("After removing plan, storedPlans array is ")
-            print(DataStore.shared.storedPlans)
-            print("---")
             
             self.navigationController?.popViewController(animated: true)
             // Update UI here to make the table display with empty results

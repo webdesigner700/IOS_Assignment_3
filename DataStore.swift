@@ -27,11 +27,11 @@ class DataStore {
     static let shared = DataStore()
     
     var storedPlans: [Plan] = [
-        Plan(planID: 0, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
-        Plan(planID: 1, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
+        //Plan(planID: 0, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
+        //Plan(planID: 1, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
     ]
     
-    var planID: Int = 2
+    var planID: Int = 1
     
     var descriptionPlan: Plan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
     
@@ -44,6 +44,7 @@ class DataStore {
     }
     
     func findPlanByID(ID: Int) -> Plan {
+        
         for plan in storedPlans {
             if (plan.planID == ID) {
                 return plan
@@ -55,6 +56,7 @@ class DataStore {
     func addNewPlan(name: String, money: Int, time: Int, payType: String) {
         storedPlans.append(Plan(planID: planID, planName: name, amount: money, transactionTime: time, paymentType: payType))
         planID += 1
+        
     }
     
     func getPlanStoredLocation(planID: Int) -> Int {
@@ -77,11 +79,10 @@ class DataStore {
         }
         
         for index in (0...storedPlans.count - 1) {
-            print("index is \(index)")
-            print("planID is \(planID)")
-            print(storedPlans[index].planID)
+            
             if storedPlans[index].planID == planID {
                 storedPlans.remove(at: index)
+                
                 return
             }
         }// end of for loop
