@@ -62,22 +62,13 @@ class DatabaseHelper {
     }
     
     func insertUser(email: String, username: String, password: String) {
-        let insertUserQuery = "INSERT INTO Users (email, username, password) VALUES (?, ?, ?);"
-        var statement: OpaquePointer?
+        let insertStatement = "INSERT INTO Users (email, username, password) VALUES ('\(email)', '\(username)', '\(password)');"
         
-        if sqlite3_prepare_v2(db, insertUserQuery, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 1, email, -1, nil)
-            sqlite3_bind_text(statement, 2, username, -1, nil)
-            sqlite3_bind_text(statement, 3, password, -1, nil)
-            
-            if sqlite3_step(statement) != SQLITE_DONE {
-                print("error inserting user")
-            }
+        if sqlite3_exec(db, insertStatement, nil, nil, nil) == SQLITE_OK {
+            print("User inserted successfully.")
         } else {
-            print("error preparing insert statement")
+            print("User insertion failed.")
         }
-        
-        sqlite3_finalize(statement)
     }
     
     func loginUser(email: String, password: String) -> Bool {

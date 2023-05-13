@@ -99,7 +99,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w94-yn-H64"/>
-                                    <segue destination="jrT-Ps-1xV" kind="show" identifier="goToHomePage" id="B1d-yy-zxu"/>
+                                    <segue destination="jrT-Ps-1xV" kind="show" identifier="signupSuccessfulSegue" id="B1d-yy-zxu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BrokeSaver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDT-fX-YvM">
