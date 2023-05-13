@@ -98,6 +98,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemYellowColor"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w94-yn-H64"/>
                                     <segue destination="jrT-Ps-1xV" kind="show" identifier="goToHomePage" id="B1d-yy-zxu"/>
                                 </connections>
                             </button>
@@ -116,6 +117,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Sign Up">
                                     <color key="baseBackgroundColor" systemColor="systemYellowColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JAK-fJ-OCu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -135,13 +139,11 @@
                     <connections>
                         <outlet property="emailSignUp" destination="raz-0r-XZi" id="enQ-6M-Uew"/>
                         <outlet property="emailTextField" destination="aBJ-ld-xRX" id="ssJ-WC-0ge"/>
-                        <outlet property="loginButton" destination="htO-t0-X4v" id="stT-vZ-h6g"/>
                         <outlet property="loginFormView" destination="8bC-Xf-vdC" id="9X7-JA-L66"/>
                         <outlet property="passwordLogin" destination="9bl-Lf-r4S" id="OBZ-tv-7fA"/>
                         <outlet property="passwordSignUp" destination="GsD-M6-KLd" id="iFw-7J-nYw"/>
                         <outlet property="passwordTextField" destination="CDS-zq-QpF" id="rmO-2o-AdI"/>
                         <outlet property="segmentedControl" destination="tKB-Sn-upC" id="7Ub-vu-7gC"/>
-                        <outlet property="signUpButton" destination="efU-mp-qsf" id="tjs-27-lw3"/>
                         <outlet property="signUpFormView" destination="8bC-Xf-vdC" id="nVB-x1-HJA"/>
                         <outlet property="signUpPasswordTextField" destination="9Rc-st-SXj" id="oD9-Cg-Tgn"/>
                         <outlet property="signUpUsernameTextField" destination="C5S-fg-7Pg" id="5kX-Vs-xyZ"/>

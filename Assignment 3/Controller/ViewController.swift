@@ -127,19 +127,46 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        // Validate the input fields and log in the user
-        let username = usernameTextField.text
-        let password = passwordTextField.text
-        // TODO: implement login logic
+    func login(username: String?, password: String?, completion: @escaping (Bool) -> Void) {
+        // Check if the username and password are not nil
+        guard let username = username, let password = password else {
+            completion(false)
+            return
+        }
+        
+        // Query the database to check if the user exists and the password is correct
+        let query = "SELECT * FROM users WHERE username = ? AND password = ?"
+        let params = [username, password]
+        executeQuery(query: query, params: params) { result in
+            if result.success, let rows = result.rows, rows.count == 1 {
+                // User exists and password is correct
+                completion(true)
+            } else {
+                // User does not exist or password is incorrect
+                completion(false)
+            }
+        }
     }
-    
+
     @IBAction func signUpButtonTapped(_ sender: Any) {
         // Validate the input fields and create a new account
         let email = emailTextField.text
         let username = signUpUsernameTextField.text
         let password = signUpPasswordTextField.text
-        // TODO: implement sign-up logic
+        
+        // Call the sign up function from the database manager
+        DatabaseHelper.shared.signUp(email: email, username: username, password: password) { success in
+            if success {
+                // Signup successful, perform segue to next screen
+                self.performSegue(withIdentifier: "signupSuccessfulSegue", sender: self)
+            } else {
+                // Signup failed, display error message
+                let alertController = UIAlertController(title: "Error", message: "Unable to create account.", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
         
 }

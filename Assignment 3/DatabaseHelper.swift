@@ -11,70 +11,155 @@ import SQLite3
 class DatabaseHelper {
     
     static let shared = DatabaseHelper()
-    private var database: Connection?
     
-    private let usersTable = Table("users")
-    private let id = Expression<Int>("id")
-    private let email = Expression<String>("email")
-    private let username = Expression<String>("username")
-    private let password = Expression<String>("password")
+    var db : OpaquePointer?
     
-    private init() {
-        do {
-            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-            database = try Connection("\(path)/users.sqlite3")
-            createTable()
-        } catch {
-            print("Error creating database: \(error)")
+    var path : String = "A3.db"
+    
+    init() {
+        self.db = createDB()
+        self.createTable()
+    }
+    
+    func createDB() -> OpaquePointer? {
+        let fileURL = try! FileManager.default
+            .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent(path)
+        
+        var db: OpaquePointer? = nil
+        if sqlite3_open(fileURL.path, &db) != SQLITE_OK {
+            print("error opening database")
+            return nil
+        } else {
+            print("database opened successfully")
+            return db
         }
     }
     
     func createTable() {
-        guard let database = database else { return }
+        let createTableQuery = """
+            CREATE TABLE IF NOT EXISTS Users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT UNIQUE,
+                username TEXT UNIQUE,
+                password TEXT
+            );
+        """
         
-        do {
-            try database.run(usersTable.create(ifNotExists: true) { table in
-                table.column(id, primaryKey: true)
-                table.column(email, unique: true)
-                table.column(username, unique: true)
-                table.column(password)
-            })
-        } catch {
-            print("Error creating table: \(error)")
+        var createTableStatement: OpaquePointer? = nil
+        
+        if sqlite3_prepare_v2(db, createTableQuery, -1, &createTableStatement, nil) == SQLITE_OK {
+            if sqlite3_step(createTableStatement) == SQLITE_DONE {
+                print("Users table created successfully")
+            } else {
+                print("error creating users table")
+            }
+        } else {
+            print("error preparing create table statement")
         }
+        
+        sqlite3_finalize(createTableStatement)
     }
     
     func insertUser(email: String, username: String, password: String) {
-        guard let database = database else { return }
+        let insertUserQuery = "INSERT INTO Users (email, username, password) VALUES (?, ?, ?);"
+        var statement: OpaquePointer?
         
-        let insert = usersTable.insert(self.email <- email, self.username <- username, self.password <- password)
-        
-        do {
-            try database.run(insert)
-            print("User inserted successfully")
-        } catch {
-            print("Error inserting user: \(error)")
+        if sqlite3_prepare_v2(db, insertUserQuery, -1, &statement, nil) == SQLITE_OK {
+            sqlite3_bind_text(statement, 1, email, -1, nil)
+            sqlite3_bind_text(statement, 2, username, -1, nil)
+            sqlite3_bind_text(statement, 3, password, -1, nil)
+            
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("error inserting user")
+            }
+        } else {
+            print("error preparing insert statement")
         }
+        
+        sqlite3_finalize(statement)
     }
     
-    func getUser(username: String) -> (email: String, password: String)? {
-        guard let database = database else { return nil }
+    func loginUser(email: String, password: String) -> Bool {
+        let loginUserQuery = "SELECT COUNT(*) FROM Users WHERE email = ? AND password = ?;"
+        var loginUserStatement: OpaquePointer? = nil
         
-        let query = usersTable.filter(self.username == username)
-        
-        do {
-            if let user = try database.pluck(query) {
-                let email = user[self.email]
-                let password = user[self.password]
-                return (email, password)
+        if sqlite3_prepare_v2(db, loginUserQuery, -1, &loginUserStatement, nil) == SQLITE_OK {
+            sqlite3_bind_text(loginUserStatement, 1, email, -1, nil)
+            sqlite3_bind_text(loginUserStatement, 2, password, -1, nil)
+            
+            if sqlite3_step(loginUserStatement) == SQLITE_ROW {
+                let count = sqlite3_column_int(loginUserStatement, 0)
+                if count > 0 {
+                    print("User logged in successfully")
+                    return true
+                } else {
+                    print("Incorrect email or password")
+                    return false
+                }
             } else {
-                print("User not found")
-                return nil
+                print("error retrieving user data")
+                return false
             }
-        } catch {
-            print("Error retrieving user: \(error)")
-            return nil
+        } else {
+            print("error preparing login user statement")
+            return false
+        }
+        
+        sqlite3_finalize(loginUserStatement)
+    }
+    
+    func userExists(email: String) -> Bool {
+        let userExistsQuery = "SELECT COUNT(*) FROM Users WHERE email = ?;"
+        var statement: OpaquePointer?
+        var userCount = 0
+        
+        if sqlite3_prepare_v2(db, userExistsQuery, -1, &statement, nil) == SQLITE_OK {
+            sqlite3_bind_text(statement, 1, email, -1, nil)
+            
+            if sqlite3_step(statement) == SQLITE_ROW {
+                userCount = Int(sqlite3_column_int(statement, 0))
+            }
+        }
+        
+        sqlite3_finalize(statement)
+        
+        return userCount > 0
+    }
+    
+    func signUp(email: String?, username: String?, password: String?, completion: @escaping (Bool) -> Void) {
+        guard let email = email, let username = username, let password = password else {
+            completion(false)
+            return
+        }
+        
+        if userExists(email: email) {
+            completion(false)
+            return
+        }
+        
+        insertUser(email: email, username: username, password: password)
+        completion(true)
+    }
+    
+    func login(email: String?, password: String?, completion: @escaping (Bool) -> Void) {
+        guard let email = email, let password = password else {
+            completion(false)
+            return
+        }
+        
+        if !userExists(email: email) {
+            completion(false)
+            return
+        }
+        
+        if loginUser(email: email, password: password) {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
     
 }
+
+
