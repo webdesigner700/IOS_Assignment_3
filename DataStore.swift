@@ -195,6 +195,71 @@ class DataStore {
         user.planIDs.append(planID)
     }
     
+    func authenticateUser(username: String, password: String) -> Bool {
+        guard let users = loadUsers() else { return false }
+        
+        for user in users {
+            if user.username == username && user.password == password {
+                currentUser = user
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func loadUsers() -> [User]? {
+        if let data = UserDefaults.standard.data(forKey: "users"),
+           let users = try? PropertyListDecoder().decode([User].self, from: data) {
+            return users
+        }
+        return nil
+    }
+    
+    func saveUsers(_ users: [User]) {
+        let data = try? PropertyListEncoder().encode(users)
+        UserDefaults.standard.set(data, forKey: "users")
+    }
+    
+    func loadCurrentUser() -> User? {
+        if let data = UserDefaults.standard.data(forKey: "currentUser"), let user = try? PropertyListDecoder().decode(User.self, from: data) {
+            return user
+        }
+        return nil
+    }
+    
+    func saveCurrentUser(_ user: User) {
+        let data = try? PropertyListEncoder().encode(user)
+        UserDefaults.standard.set(data, forKey: "currentUser")
+    }
+    
+    func login(username: String, password: String) -> Bool {
+        if let users = loadUsers() {
+            for user in users {
+                if user.username == username && user.password == password {
+                    saveCurrentUser(user)
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func logout() {
+        UserDefaults.standard.removeObject(forKey: "currentUser")
+    }
+
+    func getPlansForCurrentUser() -> [Plan] {
+        var plansForUser: [Plan] = []
+        if let currentUser = loadCurrentUser() {
+            for planID in currentUser.planIDs {
+                let plan = DataStore.shared.findPlanByID(ID: planID)
+                plansForUser.append(plan)
+            }
+        }
+        return plansForUser
+    }
+    
 }
 
 
