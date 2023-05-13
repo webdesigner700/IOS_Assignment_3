@@ -74,11 +74,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="wKD-ZF-7IZ"/>
-                    <connections>
-                        <outlet property="mainLabel" destination="kDT-fX-YvM" id="S1n-v5-1iB"/>
-                        <outlet property="passwordTextField" destination="CDS-zq-QpF" id="pO4-LA-ms0"/>
-                        <outlet property="userNameTextField" destination="uQz-Rm-L9d" id="mTm-Cg-3nf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

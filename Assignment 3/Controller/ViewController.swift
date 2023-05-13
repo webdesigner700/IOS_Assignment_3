@@ -50,7 +50,7 @@
 import Foundation
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -62,31 +62,37 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
-        guard let username = userNameTextField.text, let password = passwordTextField.text else {
+        guard let username = userNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !username.isEmpty, !password.isEmpty else {
+            showAlert(message: "Please enter both username and password.")
             return
         }
 
-        if isValid(username: username, password: password) {
-            performSegue(withIdentifier: "goToHomePage", sender: nil)
+        let user = User(username: username, password: password, planIDs: [])
+        let dataStore = UserStore()
+        if let existingUser = dataStore.getUser(username: username) {
+            // User exists, validate password
+            if existingUser.password == user.password {
+                // Successful login
+                performSegue(withIdentifier: "goToHomePage", sender: nil)
+            } else {
+                // Invalid password
+                showAlert(message: "Invalid password.")
+            }
         } else {
-            showAlert(message: "Invalid username or password.")
+            // User does not exist, add to datastore
+            dataStore.addUser(user: user)
+            performSegue(withIdentifier: "goToHomePage", sender: nil)
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToHomePage" {
-            let VC = segue.destination as! HomeScreenViewController
-            VC.userName = userNameTextField.text!
+            guard let destinationVC = segue.destination as? HomeScreenViewController,
+                  let username = userNameTextField.text else { return }
+            destinationVC.userName = username
         }
-    }
-
-    private func isValid(username: String, password: String) -> Bool {
-        // Implement your data store validation logic here
-        // Return true if the entered username and password are valid, false otherwise
-        // For example:
-        let validUsername = "johndoe"
-        let validPassword = "password"
-        return username == validUsername && password == validPassword
     }
 
     private func showAlert(message: String) {
@@ -99,7 +105,7 @@ class ViewController: UIViewController {
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
@@ -108,3 +114,23 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+//struct User {
+//    let username: String
+//    let password: String
+//    let planIDs: [String]
+//}
+
+class UserStore {
+    private var users: [User] = []
+
+    func addUser(user: User) {
+        users.append(user)
+    }
+
+    func getUser(username: String) -> User? {
+        return users.first(where: { $0.username == username })
+    }
+}
+
+
