@@ -151,6 +151,12 @@ class ViewController: UIViewController {
             if success {
                 // Login successful, perform segue to next screen
                 self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
+                // Create a new instance of ViewController
+                let myViewController = ViewController()
+                // Wait for current transition to complete before pushing new view controller
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.navigationController?.pushViewController(myViewController, animated: true)
+                }
             } else {
                 // Login failed, display error message
                 let alertController = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: .alert)
@@ -170,8 +176,14 @@ class ViewController: UIViewController {
         // Call the sign up function from the database manager
         DatabaseHelper.shared.signUp(email: email, username: username, password: password) { success in
             if success {
-                // Signup successful, perform segue to next screen
+                // Login successful, perform segue to next screen
                 self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
+                // Create a new instance of ViewController
+                let myViewController = ViewController()
+                // Wait for current transition to complete before pushing new view controller
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.navigationController?.pushViewController(myViewController, animated: true)
+                }
             } else {
                 // Signup failed, display error message
                 let alertController = UIAlertController(title: "Error", message: "Unable to create account.", preferredStyle: .alert)
