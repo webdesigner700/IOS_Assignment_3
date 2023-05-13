@@ -9,7 +9,6 @@ import Foundation
 
 
 struct Plan: Codable {
-    
     var planID: Int
     var planName: String
     var amount: Int
@@ -27,21 +26,38 @@ class DataStore {
     
     static let shared = DataStore()
     
-    var storedPlans: [Plan] = [
-        Plan(planID: 0, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
-        Plan(planID: 1, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")
-    ]
+    var storedPlans: [Plan] = []
+    var storedUsers: [User] = []
+    // other properties and methods
     
-    var planID: Int = 2
+    private var lastPlanID: Int = 0
+    private var lastUserID: Int = 0
     
-    var descriptionPlan: Plan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
+    func addNewUser(username: String, password: String) {
+        let newUser = User(username: username, password: password, planIDs: [])
+        storedUsers.append(newUser)
+    }
     
-    var timeframe: String = "Weekly"
-    var timeSelecterLocation: Int = 2
+    func getUserByUsername(username: String) -> User? {
+        for user in storedUsers {
+            if user.username == username {
+                return user
+            }
+        }
+        return nil // user not found
+    }
     
-    private init(){
-        // put stuff that need to be initialised when the program start running
-        timeframe = "Weekly"
+    func addPlanToUser(user: User, planID: Int) {
+        user.planIDs.append(planID)
+    }
+    
+    func getPlansForUser(user: User) -> [Plan] {
+        var plans: [Plan] = []
+        for planID in user.planIDs {
+            let plan = findPlanByID(ID: planID)
+            plans.append(plan)
+        }
+        return plans
     }
     
     func findPlanByID(ID: Int) -> Plan {
@@ -54,38 +70,17 @@ class DataStore {
     }
     
     func addNewPlan(name: String, money: Int, time: Int, payType: String) {
-        storedPlans.append(Plan(planID: planID, planName: name, amount: money, transactionTime: time, paymentType: payType))
-        planID += 1
-    }
-    
-    func getPlanStoredLocation(planID: Int) -> Int {
-        guard storedPlans.count > 1 else {
-            return -1 // return something that is out of bound to prevent incorrect logic operation in main menu
-        }
-        
-        for index in (0...storedPlans.count - 1) {
-            if storedPlans[index].planID == planID {
-                return index
-            }
-        }// end of for loop
-        
-        return 0
+        let newPlanID = lastPlanID + 1
+        storedPlans.append(Plan(planID: newPlanID, planName: name, amount: money, transactionTime: time, paymentType: payType))
+        lastPlanID = newPlanID
     }
     
     func removePlanByID(planID: Int) {
-        guard storedPlans.count > 0 else {
-            return
-        }
-        
-        for index in (0...storedPlans.count - 1) {
-            print("index is \(index)")
-            print("planID is \(planID)")
-            print(storedPlans[index].planID)
-            if storedPlans[index].planID == planID {
-                storedPlans.remove(at: index)
-                return
-            }
-        }// end of for loop
+        storedPlans.removeAll(where: { $0.planID == planID })
+    }
+    
+    func authenticateUser(username: String, password: String) -> User? {
+        return storedUsers.first(where: { $0.username == username && $0.password == password })
     }
     
 }
