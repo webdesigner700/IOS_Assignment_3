@@ -74,19 +74,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Show the login view by default
-        usernameLogin.isHidden = false
-        usernameTextField.isHidden = false
-        passwordLogin.isHidden = false
-        passwordTextField.isHidden = false
-        loginButton.isHidden = false
-        emailSignUp.isHidden = true
-        emailTextField.isHidden = true
-        usernameSignUp.isHidden = true
-        signUpUsernameTextField.isHidden = true
-        passwordSignUp.isHidden = true
-        signUpPasswordTextField.isHidden = true
-        signUpButton.isHidden = true
+        print(usernameLogin as Any)
+        if usernameLogin == nil {
+            print("usernameLogin is nil!")
+        }
+
+        self.usernameLogin.isHidden = false
+        self.usernameTextField.isHidden = false
+        self.passwordLogin.isHidden = false
+        self.passwordTextField.isHidden = false
+        self.loginButton.isHidden = false
+        self.emailSignUp.isHidden = true
+        self.emailTextField.isHidden = true
+        self.usernameSignUp.isHidden = true
+        self.signUpUsernameTextField.isHidden = true
+        self.passwordSignUp.isHidden = true
+        self.signUpPasswordTextField.isHidden = true
+        self.signUpButton.isHidden = true
 
         // Add a target to the segmented control to handle changes
         segmentedControl.addTarget(self, action: #selector(handleSegmentedControlChange), for: .valueChanged)
@@ -151,12 +155,6 @@ class ViewController: UIViewController {
             if success {
                 // Login successful, perform segue to next screen
                 self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
-                // Create a new instance of ViewController
-                let myViewController = ViewController()
-                // Wait for current transition to complete before pushing new view controller
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.navigationController?.pushViewController(myViewController, animated: true)
-                }
             } else {
                 // Login failed, display error message
                 let alertController = UIAlertController(title: "Error", message: "Invalid username or password.", preferredStyle: .alert)
@@ -178,12 +176,6 @@ class ViewController: UIViewController {
             if success {
                 // Login successful, perform segue to next screen
                 self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
-                // Create a new instance of ViewController
-                let myViewController = ViewController()
-                // Wait for current transition to complete before pushing new view controller
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.navigationController?.pushViewController(myViewController, animated: true)
-                }
             } else {
                 // Signup failed, display error message
                 let alertController = UIAlertController(title: "Error", message: "Unable to create account.", preferredStyle: .alert)
