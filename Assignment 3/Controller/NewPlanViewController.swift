@@ -58,6 +58,8 @@ class NewPlanViewController: UIViewController {
             }
         }
         
+        self.hideKeyboardWhenTappedAround()
+        
     }
     
     @IBAction func savePlanButtonPressed(_ sender: UIButton) {

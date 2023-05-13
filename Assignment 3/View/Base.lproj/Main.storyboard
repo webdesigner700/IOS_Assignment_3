@@ -511,7 +511,7 @@
                                     <outlet property="delegate" destination="dwb-bE-hM7" id="OnN-qb-ZW6"/>
                                 </connections>
                             </pickerView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CJN-Wz-2HA">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CJN-Wz-2HA">
                                 <rect key="frame" x="52" y="529" width="291" height="194"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -544,6 +544,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Allowance" id="YCH-aJ-6ua"/>
                     <connections>
+                        <outlet property="noteInputTextField" destination="CJN-Wz-2HA" id="xk3-yo-pd2"/>
                         <outlet property="timeFrameDropDown" destination="U0P-ZQ-Vkf" id="kNL-jE-iAd"/>
                     </connections>
                 </viewController>

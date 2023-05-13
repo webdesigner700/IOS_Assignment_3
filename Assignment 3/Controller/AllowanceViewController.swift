@@ -15,6 +15,8 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBOutlet weak var timeFrameDropDown: UIPickerView!
     
+    @IBOutlet weak var noteInputTextField: UITextField!
+    
     var timeFrame: String?
     
     var list : [String] = [String]()
@@ -29,6 +31,8 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         list  = ["Daily", "Weekly", "Monthly"]
         
         timeFrameDropDown.selectRow(DataStore.shared.timeSelecterLocation, inComponent: 0, animated: true)
+        
+        self.hideKeyboardWhenTappedAround()
         
     }
     
@@ -69,6 +73,8 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBAction func saveChangeButtonPressed(_ sender: UIButton) {
 //        DataStore.shared.timeframe = timeFrame!
 //        DataStore.shared.timeSelecterLocation = row
+        
+        DataStore.shared.allowanceNote = noteInputTextField.text
         
         self.navigationController?.popViewController(animated: true)
     }

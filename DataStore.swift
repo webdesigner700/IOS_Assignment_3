@@ -39,6 +39,8 @@ class DataStore {
     
     var timeframe: String = "Weekly"
     var timeSelecterLocation: Int = 2
+    
+    var allowanceNote: String?
 
     private init(){
         // put stuff that need to be initialised when the program start running

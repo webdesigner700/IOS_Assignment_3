@@ -45,6 +45,8 @@ class HomeScreenViewController: UIViewController {
         userNameLabel.text = userName
         
         timeframeLabel.text = DataStore.shared.timeframe
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
