@@ -17,6 +17,12 @@ struct Plan: Codable {
     var paymentType: String
 }
 
+struct User: Codable {
+    var username: String
+    var password: String
+    var planIDs: [Int] // stores the IDs of the plans associated with the user
+}
+
 class DataStore {
     
     static let shared = DataStore()
