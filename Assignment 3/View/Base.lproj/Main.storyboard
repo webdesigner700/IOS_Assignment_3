@@ -123,7 +123,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96852654525914139" green="0.96852654525914139" blue="0.96852654525914139" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" id="wKD-ZF-7IZ">
                         <nil key="title"/>
@@ -134,7 +134,7 @@
                                 <segment title="Log In"/>
                                 <segment title="Sign Up"/>
                             </segments>
-                            <color key="selectedSegmentTintColor" red="0.96611279249191284" green="0.93908092360100193" blue="0.87758350603999835" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="selectedSegmentTintColor" red="0.73430216511521751" green="0.84255411315134432" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
