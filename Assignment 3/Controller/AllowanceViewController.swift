@@ -28,6 +28,8 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         list  = ["Daily", "Weekly", "Monthly"]
         
+        timeFrameDropDown.selectRow(DataStore.shared.timeSelecterLocation, inComponent: 0, animated: true)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +60,17 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         // The parameter named row and componment represents what we selected
         
         timeFrame = String(list[row])
+        
         DataStore.shared.timeframe = timeFrame!
+        DataStore.shared.timeSelecterLocation = row
+        
     }
 
+    @IBAction func saveChangeButtonPressed(_ sender: UIButton) {
+//        DataStore.shared.timeframe = timeFrame!
+//        DataStore.shared.timeSelecterLocation = row
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

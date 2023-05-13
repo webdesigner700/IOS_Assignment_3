@@ -31,6 +31,7 @@ class DataStore {
     var descriptionPlan: Plan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
     
     var timeframe: String = "Weekly"
+    var timeSelecterLocation: Int = 2
     
     private init(){
         // put stuff that need to be initialised when the program start running

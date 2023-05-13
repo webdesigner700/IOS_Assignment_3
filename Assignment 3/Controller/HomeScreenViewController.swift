@@ -120,6 +120,10 @@ extension HomeScreenViewController:UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let plan = DataStore.shared.storedPlans[indexPath.row]
         
+        print("Now this cell is processing plan at index path row \(indexPath.row)")
+        print(plan)
+        print("The button in this cell has tag: \(cell.viewWithTag(descriptionTag)!.tag)")
+        
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
         }
@@ -130,11 +134,22 @@ extension HomeScreenViewController:UITableViewDataSource {
         
         if let descriptionButton = cell.viewWithTag(descriptionTag) as? UIButton {
             
+            print("before changing button tag, the data are:")
+            print("button tag is \(descriptionButton.tag)")
+            print("plan id is \(plan.planID)")
+            
             descriptionButton.tag = plan.planID
+            
+            print("after changing, the button tag:")
+            print(descriptionButton.tag)
+            
+            print("--------")
             
             descriptionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             // this runs when the button is pressed on
         }
+        
+        print("--------|")
 
         return cell
     }

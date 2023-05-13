@@ -447,6 +447,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Save Allowance Changes">
                                     <color key="baseBackgroundColor" systemColor="systemYellowColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="saveChangeButtonPressed:" destination="dwb-bE-hM7" eventType="touchUpInside" id="YFs-0P-kcH"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calculation Timeframe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytM-ai-OTq">
                                 <rect key="frame" x="80" y="269" width="233" height="29"/>
