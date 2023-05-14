@@ -388,7 +388,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vmt-fQ-QuC">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vmt-fQ-QuC">
                                 <rect key="frame" x="83" y="637" width="227" height="69"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="Button"/>
@@ -453,6 +453,7 @@
                             <constraint firstItem="RWR-6o-i10" firstAttribute="leading" secondItem="qx0-ZO-VrK" secondAttribute="leading" id="WFF-6d-e64"/>
                             <constraint firstItem="8cg-Vn-UAy" firstAttribute="top" secondItem="RWR-6o-i10" secondAttribute="bottom" constant="76" id="Wwc-5T-05a"/>
                             <constraint firstItem="qx0-ZO-VrK" firstAttribute="trailing" secondItem="8cg-Vn-UAy" secondAttribute="trailing" constant="247" id="Ycd-9L-GnO"/>
+                            <constraint firstItem="Vmt-fQ-QuC" firstAttribute="top" secondItem="suq-Hs-vVD" secondAttribute="bottom" constant="95" id="ZkJ-Uw-dko"/>
                             <constraint firstItem="8cg-Vn-UAy" firstAttribute="top" secondItem="RWR-6o-i10" secondAttribute="bottom" constant="76" id="anO-xp-4PM"/>
                             <constraint firstItem="AcL-xu-iJK" firstAttribute="top" secondItem="Sz7-F9-UgL" secondAttribute="bottom" constant="26" id="cXo-sT-RNE"/>
                             <constraint firstItem="suq-Hs-vVD" firstAttribute="leading" secondItem="qx0-ZO-VrK" secondAttribute="leading" constant="60" id="cyB-lM-xns"/>

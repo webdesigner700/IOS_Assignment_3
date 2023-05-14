@@ -162,13 +162,13 @@ class DatabaseHelper {
         sqlite3_finalize(statement)
     }
     
-    func retrieveUniqueUserData(forEmail email: String) -> (username: String, email: String, password: String)? {
-        let query = "SELECT username, email, password FROM Users WHERE email = ?;"
+    func retrieveUniqueUserData(forUsername username: String) -> (username: String, email: String, password: String)? {
+        let query = "SELECT username, email, password FROM Users WHERE username = ?;"
         var statement: OpaquePointer?
 
         if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
             // Bind parameters to the statement
-            sqlite3_bind_text(statement, 1, (email as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (username as NSString).utf8String, -1, nil)
 
             // Execute the statement
             if sqlite3_step(statement) == SQLITE_ROW {

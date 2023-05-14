@@ -104,7 +104,7 @@ class HomeScreenViewController: UIViewController {
         if segue.identifier == "goToProfilePage" {
             if let userName = userNameLabel?.text {
                 let VC = segue.destination as! ProfileViewController
-                VC.userName = userName
+//                VC.userName = userName
             }
         }
         else if segue.identifier == "goToNewExpenses" {
