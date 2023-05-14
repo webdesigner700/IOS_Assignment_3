@@ -187,7 +187,7 @@ class DatabaseHelper {
             print("Error preparing statement: \(String(cString: sqlite3_errmsg(db)))")
             return nil
         }
-        
+
         // Reset the statement and finalize it
         sqlite3_reset(statement)
         sqlite3_finalize(statement)

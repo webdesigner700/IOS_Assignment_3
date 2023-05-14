@@ -25,9 +25,10 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Retrieve user information from the database
         let dbHelper = DatabaseHelper()
+        print(dbHelper) // check if dbHelper is nil
 
         if let retrievedUniqueUserData = dbHelper.retrieveUniqueUserData(forUsername: username) {
             uniqueUsername.text = retrievedUniqueUserData.username
