@@ -477,6 +477,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="f28-ma-aBl"/>
                     <connections>
+                        <outlet property="uniqueEmail" destination="1Fz-C1-lKP" id="3hO-C0-v8h"/>
+                        <outlet property="uniquePassword" destination="suq-Hs-vVD" id="wAT-ov-fe9"/>
+                        <outlet property="uniqueUsername" destination="Sz7-F9-UgL" id="vmB-cb-NbK"/>
                         <outlet property="userNameLabel" destination="RWR-6o-i10" id="7Fv-BG-eSc"/>
                     </connections>
                 </viewController>

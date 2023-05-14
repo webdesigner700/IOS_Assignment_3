@@ -9,12 +9,15 @@ import Foundation
 import UIKit
 
 class ProfileViewController: UIViewController {
-
-    var user: User?
     
+    var user: User?
+    var db: DatabaseHelper!
+    var email: String?
+
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var uniqueUsername: UILabel!
+    @IBOutlet weak var uniqueEmail: UILabel!
+    @IBOutlet weak var uniquePassword: UILabel!
     
     @IBAction func returnToLoginPage(_ sender: UIButton) {
         self.navigationController?.popToRootViewController(animated: true)
@@ -24,19 +27,15 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // Retrieve user information from the database
-        if let userID = user?.id {
-            let db = YourDatabaseConnection()
-            let query = "SELECT email, username, password FROM users WHERE id = \(userID)"
-            if let result = db.executeQuery(query) {
-                if result.next() {
-                    let email = result.string(forColumn: "email")
-                    let username = result.string(forColumn: "username")
-                    let password = result.string(forColumn: "password")
-                    emailLabel.text = email
-                    userNameLabel.text = username
-                    passwordLabel.text = password
-                }
-            }
+        let dbHelper = DatabaseHelper()
+    
+        if let retrievedUniqueUserData = dbHelper.retrieveUniqueUserData(forEmail: email!) {
+            uniqueUsername.text = retrievedUniqueUserData.username
+            uniqueEmail.text = retrievedUniqueUserData.email
+            uniquePassword.text = retrievedUniqueUserData.password
+        } else {
+            print("User not found")
         }
     }
+    
 }

@@ -162,6 +162,37 @@ class DatabaseHelper {
         sqlite3_finalize(statement)
     }
     
+    func retrieveUniqueUserData(forEmail email: String) -> (username: String, email: String, password: String)? {
+        let query = "SELECT username, email, password FROM Users WHERE email = ?;"
+        var statement: OpaquePointer?
+
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+            // Bind parameters to the statement
+            sqlite3_bind_text(statement, 1, (email as NSString).utf8String, -1, nil)
+
+            // Execute the statement
+            if sqlite3_step(statement) == SQLITE_ROW {
+                // User found, retrieve data
+                let username = String(cString: sqlite3_column_text(statement, 0))
+                let email = String(cString: sqlite3_column_text(statement, 1))
+                let password = String(cString: sqlite3_column_text(statement, 2))
+
+                return (username, email, password)
+            } else {
+                // User not found
+                return nil
+            }
+        } else {
+            // Statement preparation failed
+            print("Error preparing statement: \(String(cString: sqlite3_errmsg(db)))")
+            return nil
+        }
+        
+        // Reset the statement and finalize it
+        sqlite3_reset(statement)
+        sqlite3_finalize(statement)
+    }
+
 }
 
 
