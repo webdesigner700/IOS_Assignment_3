@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print(usernameLogin as Any)
         if usernameLogin == nil {
             print("usernameLogin is nil!")
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
         segmentedControl.addTarget(self, action: #selector(handleSegmentedControlChange), for: .valueChanged)
         segmentedControl.frame = CGRect(x: 0, y: 0, width: 410, height: 120)
     }
-
+    
     @objc func handleSegmentedControlChange() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -176,7 +176,7 @@ class ViewController: UIViewController {
         DatabaseHelper.shared.signUp(email: email, username: username, password: password) { success in
             if success {
                 // Login successful, perform segue to next screen
-                self.performSegue(withIdentifier: "loginSuccessfulSegue", sender: self)
+                self.performSegue(withIdentifier: "signUpSuccessfulSegue", sender: self)
             } else {
                 // Signup failed, display error message
                 let alertController = UIAlertController(title: "Error", message: "Unable to create account.", preferredStyle: .alert)

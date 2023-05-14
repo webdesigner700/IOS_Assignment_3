@@ -112,6 +112,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JAK-fJ-OCu"/>
+                                    <segue destination="jrT-Ps-1xV" kind="show" identifier="signUpSuccessfulSegue" id="PG1-Tc-caz"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQF-3u-5ez">
@@ -127,7 +128,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wKD-ZF-7IZ">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="tKB-Sn-upC">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="tKB-Sn-upC">
                             <rect key="frame" x="16" y="5.6666666666666679" width="361" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -648,6 +649,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="QJz-2o-IMa"/>
+        <segue reference="PG1-Tc-caz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

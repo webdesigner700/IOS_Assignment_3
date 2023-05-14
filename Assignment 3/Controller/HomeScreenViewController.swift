@@ -47,6 +47,28 @@ class HomeScreenViewController: UIViewController {
         timeframeLabel.text = DataStore.shared.timeframe
         
         
+        
+        // Remove the default back button
+        navigationItem.hidesBackButton = true
+        
+        // Create a custom bar button item for the log out button
+        let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logOut))
+        
+        // Set the custom button as the left bar button item
+        navigationItem.leftBarButtonItem = logOutButton
+    }
+    
+    @objc func logOut() {
+        // Reset the user session
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        UserDefaults.standard.synchronize()
+
+        // Navigate to the login screen
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "ViewController")
+        let navController = UINavigationController(rootViewController: loginVC)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
