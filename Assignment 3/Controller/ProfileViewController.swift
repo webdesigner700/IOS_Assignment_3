@@ -10,22 +10,33 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var user: User?
     
-    var userName:String?
-
     @IBOutlet weak var userNameLabel: UILabel!
-    
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
     
     @IBAction func returnToLoginPage(_ sender: UIButton) {
-        
         self.navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userNameLabel.text = userName
+        // Retrieve user information from the database
+        if let userID = user?.id {
+            let db = YourDatabaseConnection()
+            let query = "SELECT email, username, password FROM users WHERE id = \(userID)"
+            if let result = db.executeQuery(query) {
+                if result.next() {
+                    let email = result.string(forColumn: "email")
+                    let username = result.string(forColumn: "username")
+                    let password = result.string(forColumn: "password")
+                    emailLabel.text = email
+                    userNameLabel.text = username
+                    passwordLabel.text = password
+                }
+            }
+        }
     }
-
-
 }
