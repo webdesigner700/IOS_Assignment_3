@@ -99,6 +99,7 @@ class HomeScreenViewController: UIViewController {
         let indexPath = IndexPath(row: 0, section: 0)
         planDetailsTable.deleteRows(at: [indexPath], with: .fade)
         
+        
     }
     
 
