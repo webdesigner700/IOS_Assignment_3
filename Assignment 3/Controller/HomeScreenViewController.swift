@@ -39,7 +39,7 @@ class HomeScreenViewController: UIViewController {
         
         timeframeLabel.text = DataStore.shared.timeFrame
         
-        
+        allowanceAmountLabel.text = "\( DataStore.shared.calculatedAllowanceAmount!)"
         
         // Remove the default back button
         navigationItem.hidesBackButton = true
@@ -68,7 +68,8 @@ class HomeScreenViewController: UIViewController {
         
         planDetailsTable.reloadData()
         timeframeLabel.text = DataStore.shared.timeFrame
-        allowanceAmountLabel.text = String(DataStore.shared.calculatedAllowanceAmount!)
+        DataStore.shared.calculateAllowance()
+        allowanceAmountLabel.text = "\( DataStore.shared.calculatedAllowanceAmount!)"
         
     }
     

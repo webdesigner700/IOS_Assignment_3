@@ -102,5 +102,20 @@ class DataStore {
     func addPlanToUser(user: inout User, planID: Int) {
         user.planIDs.append(planID)
     }
+    
+    func calculateAllowance() {
+        if (timeFrame == "Daily") {
+
+            calculatedAllowanceAmount = originalAllowanceAmount/28
+        }
+        else if (timeFrame == "Weekly") {
+
+            calculatedAllowanceAmount = originalAllowanceAmount/4
+        }
+        else if (timeFrame == "Monthly") {
+
+            calculatedAllowanceAmount = originalAllowanceAmount
+        }
+    }
 
 }

@@ -21,6 +21,7 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var noteInputTextField: UITextField!
     
     var timeFrame: String?
+    //var initialPos = 1
     
     var list : [String] = [String]()
     
@@ -53,7 +54,8 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             looper = false
         }
         
-        self.allowanceAmountLabel.text = String(DataStore.shared.calculatedAllowanceAmount!)
+        //self.allowanceAmountLabel.text = String(DataStore.shared.calculatedAllowanceAmount!)
+        self.allowanceAmountLabel.text = "$\(DataStore.shared.calculatedAllowanceAmount!)"
         
         list  = ["Daily", "Weekly", "Monthly"]
         
@@ -93,6 +95,21 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         DataStore.shared.timeFrame = timeFrame!
         DataStore.shared.timeSelecterLocation = row
         
+        if (DataStore.shared.timeFrame == "Daily") {
+            
+            DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount/28
+        }
+        else if (DataStore.shared.timeFrame == "Weekly") {
+            
+            DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount/4
+        }
+        else if (DataStore.shared.timeFrame == "Monthly") {
+            
+            DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount
+        }
+        
+        self.allowanceAmountLabel.text = "$\(DataStore.shared.calculatedAllowanceAmount!)"
+        
     }
 
     @IBAction func saveChangeButtonPressed(_ sender: UIButton) {
@@ -110,9 +127,13 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount
         }
         
+        self.allowanceAmountLabel.text = "$\(DataStore.shared.calculatedAllowanceAmount!)"
+        
         DataStore.shared.allowanceNote = noteInputTextField.text
         
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
     
 }
