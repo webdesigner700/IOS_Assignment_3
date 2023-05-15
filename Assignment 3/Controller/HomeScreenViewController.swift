@@ -10,7 +10,6 @@ import UIKit
 
 class HomeScreenViewController: UIViewController {
     
-    let NEW_PLAN = "newPlan"
     
     let planNameTag = 100
     let amountTag = 101
