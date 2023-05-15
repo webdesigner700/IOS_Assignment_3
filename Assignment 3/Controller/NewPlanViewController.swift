@@ -67,14 +67,14 @@ class NewPlanViewController: UIViewController {
         if (planType == "Expense"){ // create new money plan
             
             let actualAmount = (0 - (Int(amountTextField.text ?? "0") ?? 0))
-            DataStore.shared.allowanceAmount += actualAmount
+            DataStore.shared.originalAllowanceAmount += actualAmount
             DataStore.shared.addNewPlan(name: planNameTextField.text ?? "", money: actualAmount, time: Int(transactionTimeTextField.text ?? "0") ?? 0, payType: paymentTypeTextField.text ?? ""
             )
         }
         else if (planType == "Influx"){
             
             let amount = (Int(amountTextField.text ?? "0") ?? 0)
-            DataStore.shared.allowanceAmount += amount
+            DataStore.shared.originalAllowanceAmount += amount
             DataStore.shared.addNewPlan(
                 name: planNameTextField.text ?? "",
                 money: Int(amountTextField.text ?? "0") ?? 0,

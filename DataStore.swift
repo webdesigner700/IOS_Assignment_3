@@ -28,7 +28,17 @@ class DataStore {
 
     static let shared = DataStore()
     
-    var allowanceAmount: Int = 0
+    var originalAllowanceAmount: Int = 0
+    
+    var calculatedAllowanceAmount: Int?
+    
+    var timeFrame: String?
+    
+    private init() {
+        
+        calculatedAllowanceAmount = originalAllowanceAmount
+        timeFrame = "Monthly"
+    }
 
     var storedPlans: [Plan] = []
 
@@ -37,16 +47,10 @@ class DataStore {
     var planID: Int = 2
 
     var descriptionPlan: Plan = Plan(planID: 0, planName: "Dummy", amount: 0, transactionTime: 0, paymentType: "Dummy")
-
-    var timeframe: String = ""
+    
     var timeSelecterLocation: Int = 2
 
     var allowanceNote: String?
-
-    private init(){
-        // put stuff that need to be initialised when the program start running
-        timeframe = "Weekly"
-    }
 
     func findPlanByID(ID: Int) -> Plan {
 

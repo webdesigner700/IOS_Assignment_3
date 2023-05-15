@@ -23,17 +23,9 @@ class HomeScreenViewController: UIViewController {
     
     var tag = 0
     
-//    var newPlans:[Plan] = [
-//        Plan(planID: 1, planName: "plan1", amount: 60, transactionTime: 6, paymentType: "Cash"),
-//        Plan(planID: 2, planName: "plan2", amount: 40, transactionTime: 2, paymentType: "Card")]
-    
-    
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeframeLabel: UILabel!
-//
     @IBOutlet weak var allowanceAmountLabel: UILabel!
-    //@IBOutlet weak var planIDLabel: UILabel!
-    //    @IBOutlet weak var tableDisplayedPlanName: UILabel!
     
     @IBOutlet weak var planDetailsTable: UITableView!
     
@@ -45,7 +37,7 @@ class HomeScreenViewController: UIViewController {
         
         userNameLabel.text = userName
         
-        timeframeLabel.text = DataStore.shared.timeframe
+        timeframeLabel.text = DataStore.shared.timeFrame
         
         
         
@@ -75,8 +67,8 @@ class HomeScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         planDetailsTable.reloadData()
-        timeframeLabel.text = DataStore.shared.timeframe
-        allowanceAmountLabel.text = String(DataStore.shared.allowanceAmount)
+        timeframeLabel.text = DataStore.shared.timeFrame
+        allowanceAmountLabel.text = String(DataStore.shared.calculatedAllowanceAmount!)
         
     }
     

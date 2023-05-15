@@ -26,17 +26,38 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         self.timeFrameDropDown.delegate = self
         self.timeFrameDropDown.dataSource = self
-        self.allowanceAmountLabel.text = String(DataStore.shared.allowanceAmount)
+        
+        var looper: Bool = true
+        
+        
+        while (looper == true) {
+            
+            if (DataStore.shared.timeFrame == "Daily") {
+                
+                DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount/28
+            }
+            else if (DataStore.shared.timeFrame == "Weekly") {
+                
+                DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount/4
+            }
+            else if (DataStore.shared.timeFrame == "Monthly") {
+                
+                DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount
+            }
+            
+            looper = false
+        }
+        
+        self.allowanceAmountLabel.text = String(DataStore.shared.calculatedAllowanceAmount!)
         
         list  = ["Daily", "Weekly", "Monthly"]
         
         timeFrameDropDown.selectRow(DataStore.shared.timeSelecterLocation, inComponent: 0, animated: true)
-        
-//        self.hideKeyboardWhenTappedAround()
         
     }
     
@@ -69,14 +90,25 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         timeFrame = String(list[row])
         
-        DataStore.shared.timeframe = timeFrame!
+        DataStore.shared.timeFrame = timeFrame!
         DataStore.shared.timeSelecterLocation = row
         
     }
 
     @IBAction func saveChangeButtonPressed(_ sender: UIButton) {
-//        DataStore.shared.timeframe = timeFrame!
-//        DataStore.shared.timeSelecterLocation = row
+        
+        if (DataStore.shared.timeFrame == "Daily") {
+            
+            DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount/28
+        }
+        else if (DataStore.shared.timeFrame == "Weekly") {
+            
+            DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount/4
+        }
+        else if (DataStore.shared.timeFrame == "Monthly") {
+            
+            DataStore.shared.calculatedAllowanceAmount = DataStore.shared.originalAllowanceAmount
+        }
         
         DataStore.shared.allowanceNote = noteInputTextField.text
         
