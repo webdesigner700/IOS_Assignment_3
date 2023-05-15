@@ -186,6 +186,17 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "signUpSuccessfulSegue" {
+            let VC = segue.destination as! HomeScreenViewController
+            VC.userName = signUpUsernameTextField.text!
+        }
+        else if segue.identifier == "loginSuccessfulSegue" {
+            let VC = segue.destination as! HomeScreenViewController
+            VC.userName = usernameTextField.text!
+        }
+    }
         
 }
 
