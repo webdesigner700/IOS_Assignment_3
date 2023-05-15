@@ -41,6 +41,7 @@ class DataStore {
     }
 
     var storedPlans: [Plan] = []
+    var archivedPlans: [Plan] = []
 
     var buttonIDs: [Int] = []
 
@@ -64,6 +65,7 @@ class DataStore {
 
     func addNewPlan(name: String, money: Int, time: Int, payType: String) {
         storedPlans.append(Plan(planID: planID, planName: name, amount: money, transactionTime: time, paymentType: payType))
+        archivedPlans.append(Plan(planID: planID, planName: name, amount: money, transactionTime: time, paymentType: payType))
         planID += 1
 
     }

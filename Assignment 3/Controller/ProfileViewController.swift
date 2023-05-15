@@ -40,4 +40,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @IBAction func archivedPlanButtonPressed(_ sender: UIButton) {
+        
+        let ArchiveViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArchiveViewController") as! ArchiveViewController
+                //
+                self.navigationController?.pushViewController(ArchiveViewController, animated: true)
+        
+    }
+    
 }
