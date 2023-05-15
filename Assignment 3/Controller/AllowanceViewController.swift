@@ -13,6 +13,9 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     //https://codewithchris.com/uipickerview-example/ - refer to this for VIewPicker
     
     
+    @IBOutlet weak var allowanceAmountLabel: UILabel!
+    
+    
     @IBOutlet weak var timeFrameDropDown: UIPickerView!
     
     @IBOutlet weak var noteInputTextField: UITextField!
@@ -27,6 +30,7 @@ class AllowanceViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         self.timeFrameDropDown.delegate = self
         self.timeFrameDropDown.dataSource = self
+        self.allowanceAmountLabel.text = String(DataStore.shared.allowanceAmount)
         
         list  = ["Daily", "Weekly", "Monthly"]
         

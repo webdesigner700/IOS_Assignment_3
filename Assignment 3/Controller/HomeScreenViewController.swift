@@ -31,6 +31,7 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var timeframeLabel: UILabel!
 //
+    @IBOutlet weak var allowanceAmountLabel: UILabel!
     //@IBOutlet weak var planIDLabel: UILabel!
     //    @IBOutlet weak var tableDisplayedPlanName: UILabel!
     
@@ -73,32 +74,11 @@ class HomeScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        //self.viewDidLoad()
-        
-//        planDetailsTable.delegate = self
-//        planDetailsTable.dataSource = self
-        
-        //userNameLabel.text = userName
-        
         planDetailsTable.reloadData()
         timeframeLabel.text = DataStore.shared.timeframe
+        allowanceAmountLabel.text = String(DataStore.shared.allowanceAmount)
         
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "goToProfilePage" {
-//            let VC = segue.destination as! ProfileViewController
-//            VC.userName = userNameLabel.text!
-//        }
-//        else if segue.identifier == "goToNewExpenses" {
-//            let VC = segue.destination as! NewPlanViewController
-//            VC.planType = "Expense"
-//        }
-//        else if segue.identifier == "goToNewInflux" {
-//            let VC = segue.destination as! NewPlanViewController
-//            VC.planType = "Influx"
-//        }
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToProfilePage" {
@@ -125,32 +105,7 @@ class HomeScreenViewController: UIViewController {
         
         DataStore.shared.storedPlans.remove(at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
-//        let thisCell = planDetailsTable.cellForRow(at: indexPath)?.viewWithTag(idTag) as? UILabel
-//        let thisPlanID = thisCell?.text
-//        print("Removing plan with ID \(thisPlanID)")
         planDetailsTable.deleteRows(at: [indexPath], with: .fade)
-        
-//        let indexPath = IndexPath(row: sender.tag, section: 0)
-//        //let rowNumber = sender.tag
-//        //let thisPlanIDLabel = planDetailsTable.cellForRow(at: indexPath)?.viewWithTag(sender.tag) as? UILabel
-//        let thisPlanIDLabel = sender.superview?.viewWithTag(sender.tag) as? UILabel
-//        //let thisPlanIDLabel = cell?.viewWithTag(planNameTag) as? UILabel
-//        let planIDText: String = thisPlanIDLabel?.text ?? "Error String"
-//        print(planIDText)
-
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        let cell = tableView.cellForRow(at: indexPath)
-
-//        let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
-////        let descriptionPlan = DataStore.shared.findPlanByID(ID: Int(planIDText)!)
-//
-//        DataStore.shared.descriptionPlan = descriptionPlan
-//
-//        descriptionButtonChecker = true
-//
-//        let NewPlanViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewPlanViewController") as! NewPlanViewController
-//
-//        self.navigationController?.pushViewController(NewPlanViewController, animated: true)
         
     }
     
