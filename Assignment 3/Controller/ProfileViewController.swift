@@ -29,6 +29,8 @@ class ProfileViewController: UIViewController {
         // Retrieve user information from the database
         let dbHelper = DatabaseHelper()
         print(dbHelper) // check if dbHelper is nil
+        
+        userNameLabel.text = username
 
         if let retrievedUniqueUserData = dbHelper.retrieveUniqueUserData(forUsername: username) {
             uniqueUsername.text = retrievedUniqueUserData.username
@@ -40,12 +42,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func archivedPlanButtonPressed(_ sender: UIButton) {
+    /*@IBAction func archivedPlanButtonPressed(_ sender: UIButton) {
         
         let ArchiveViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArchiveViewController") as! ArchiveViewController
                 //
                 self.navigationController?.pushViewController(ArchiveViewController, animated: true)
         
-    }
+    }*/
     
 }
