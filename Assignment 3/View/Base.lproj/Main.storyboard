@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rcJ-8g-64D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rcJ-8g-64D">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -585,7 +585,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UniqueEmail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fz-C1-lKP">
-                                <rect key="frame" x="60" y="445" width="95" height="21"/>
+                                <rect key="frame" x="60" y="445" width="182" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -648,6 +648,7 @@
                             <constraint firstItem="RWR-6o-i10" firstAttribute="top" secondItem="v7X-MF-Gp7" secondAttribute="bottom" constant="9" id="UHa-6c-xND"/>
                             <constraint firstItem="Vmt-fQ-QuC" firstAttribute="top" secondItem="k0x-Iq-DAt" secondAttribute="bottom" constant="31" id="W3y-bQ-BlB"/>
                             <constraint firstItem="RWR-6o-i10" firstAttribute="leading" secondItem="qx0-ZO-VrK" secondAttribute="leading" id="WFF-6d-e64"/>
+                            <constraint firstItem="qx0-ZO-VrK" firstAttribute="trailing" secondItem="1Fz-C1-lKP" secondAttribute="trailing" constant="151" id="WsT-va-vAr"/>
                             <constraint firstItem="8cg-Vn-UAy" firstAttribute="top" secondItem="RWR-6o-i10" secondAttribute="bottom" constant="76" id="Wwc-5T-05a"/>
                             <constraint firstItem="qx0-ZO-VrK" firstAttribute="trailing" secondItem="8cg-Vn-UAy" secondAttribute="trailing" constant="247" id="Ycd-9L-GnO"/>
                             <constraint firstItem="8cg-Vn-UAy" firstAttribute="top" secondItem="RWR-6o-i10" secondAttribute="bottom" constant="76" id="anO-xp-4PM"/>
@@ -661,7 +662,6 @@
                             <constraint firstItem="suq-Hs-vVD" firstAttribute="top" secondItem="OUh-Fg-z84" secondAttribute="bottom" constant="8" id="hrY-yU-f2C"/>
                             <constraint firstItem="1Fz-C1-lKP" firstAttribute="leading" secondItem="qx0-ZO-VrK" secondAttribute="leading" constant="60" id="kWh-QR-Bd2"/>
                             <constraint firstItem="v7X-MF-Gp7" firstAttribute="leading" secondItem="qx0-ZO-VrK" secondAttribute="leading" constant="60" id="mS1-iq-tgV"/>
-                            <constraint firstItem="qx0-ZO-VrK" firstAttribute="trailing" secondItem="1Fz-C1-lKP" secondAttribute="trailing" constant="238" id="mht-58-IHh"/>
                             <constraint firstItem="Sz7-F9-UgL" firstAttribute="top" secondItem="8cg-Vn-UAy" secondAttribute="bottom" constant="8" id="qk7-U0-pFT"/>
                             <constraint firstItem="Sz7-F9-UgL" firstAttribute="leading" secondItem="qx0-ZO-VrK" secondAttribute="leading" constant="60" id="rXk-W4-4dF"/>
                             <constraint firstItem="1Fz-C1-lKP" firstAttribute="top" secondItem="AcL-xu-iJK" secondAttribute="bottom" constant="8" id="rcR-c1-Vh4"/>
