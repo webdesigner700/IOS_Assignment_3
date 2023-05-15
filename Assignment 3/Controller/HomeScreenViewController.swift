@@ -17,9 +17,13 @@ class HomeScreenViewController: UIViewController {
     let payTag = 102
     let timeTag = 103
     
+    let removeButtonTag = 200
+    
+    var numberOfUpdatedButtons = 0
+    
     var userName:String?
 
-    var descriptionButtonChecker = false
+    //var descriptionButtonChecker = false
     
     var tag = 0
     
@@ -45,7 +49,6 @@ class HomeScreenViewController: UIViewController {
         userNameLabel.text = userName
         
         timeframeLabel.text = DataStore.shared.timeframe
-        
         
         
         // Remove the default back button
@@ -117,6 +120,26 @@ class HomeScreenViewController: UIViewController {
         }
     }
     
+    @IBAction func removeButtonPressed(_ sender: UIButton){
+        
+        print("This button has tag of \(sender.tag)")
+        
+        let descriptionPlan = DataStore.shared.findPlanByID(ID: sender.tag)
+        //        let descriptionPlan = DataStore.shared.findPlanByID(ID: Int(planIDText)!)
+        //
+        DataStore.shared.descriptionPlan = descriptionPlan
+        //
+        //descriptionButtonChecker = true
+        
+        sender.tag = removeButtonTag
+        print("Now this button should have default tag of \(removeButtonTag)")
+        //
+        let NewPlanViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewPlanViewController") as! NewPlanViewController
+        //
+        self.navigationController?.pushViewController(NewPlanViewController, animated: true)
+        
+    }
+    
     @IBAction func buttonPressed(_ sender: UIButton) {
         
         guard DataStore.shared.storedPlans.count > 0 else {
@@ -180,7 +203,6 @@ extension HomeScreenViewController:UITableViewDataSource {
         print(plan)
         
         
-        
         if let planNameLabel = cell.viewWithTag(planNameTag) as? UILabel {
             planNameLabel.text = plan.planName
         }
@@ -197,16 +219,40 @@ extension HomeScreenViewController:UITableViewDataSource {
             idLabel.text = String(plan.transactionTime)
         }
         
-//        if let descriptionButton = cell.viewWithTag(descriptionTag) as? UIButton {
-//
-//
-//            descriptionButton.tag = indexPath.row
-//
-//            //print("Adding button with tag \(plan.planID) into array")
-//
-//            descriptionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//            // this runs when the button is pressed on
+        //if (numberOfUpdatedButtons){
+            if let removeButton = cell.viewWithTag(removeButtonTag) as? UIButton {
+
+                print("Found a button with default tag, linking up with plan \(plan.planID)")
+                
+                removeButton.tag = plan.planID
+                //removeButton.tag = indexPath.row
+
+                //print("Adding button with tag \(plan.planID) into array")
+
+                removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
+                // this runs when the button is pressed on
+            }
+            else if (DataStore.shared.storedPlans.count > 0){
+                let storedPlans = DataStore.shared.storedPlans
+                for index in (0...storedPlans.count - 1) {
+                    print("Searching for any buttons linked by tag \(storedPlans[index].planID)")
+                    if let removeButton = cell.viewWithTag(storedPlans[index].planID) as? UIButton {
+                        print("Found this plan is linked with button tag \(removeButton.tag)")
+                        print("Updating the button tag with planID \(plan.planID)")
+                        removeButton.tag = plan.planID
+                        break
+                    }
+    //
+                }// end of for loop
+            }
+            else{
+                print("No button is found during this round")
+            }
 //        }
+//        else{
+//            descriptionButtonChecker = false
+//        }
+        
 
         return cell
     }
